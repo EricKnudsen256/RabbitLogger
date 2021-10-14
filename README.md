@@ -1,5 +1,11 @@
 # RabbitLogger
-
+To add the logger submodule to your directory, use the command
+git submodule update --init --recursive to install it
+In order to update the logger, run the command
+git submodule update --remote to get the latest version.
+Additionally, you can pull the reposity itself from
+https://github.com/EricKnudsen256/RabbitLogger
+if that is more convinient for you.
 
 When using this logger, make sure to add 'require_once()' the file.
 In order to use the logger, create a new instance, and input the name of the machine to log for.
@@ -19,3 +25,4 @@ Info: Use for noncritical information that might be useful
 Warning: Use for info that could be a problem
 Error: Use for critical problems that will likely break systems
 Try to keep these error levels with the first letter capitalized
+

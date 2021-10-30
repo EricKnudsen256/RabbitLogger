@@ -18,7 +18,9 @@ To create a log, use $logger->log_local($reportLevel, $mssg)
 to log onto the local machine, or
 $logger->log_rabbit($reportLevel, $mssg) to log on every machine
 
-In order to recieve logs from all machines, 
+In order to recieve logs from all machines, run:
+bash setupListener.bash and it will automatically set up the
+log listener to start whenever the machine starts
 
 I suggest we use standardized our warning levels, so if we want
 to grep through the files it will be easier, I reccomend:

@@ -136,9 +136,11 @@ class rabbitLogger
 			$callback_queue->bind($exchange->getName(),$this->routing_key.".response");
 			*/
 
+			/*
 			$this->conn_queue = new AMQPQueue($channel);
 			$this->conn_queue->setName($this->queue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
+			*/
 
 			$exchange->publish($json_message,$this->routing_key,AMQP_NOPARAM);
 			
@@ -157,6 +159,7 @@ class rabbitLogger
 class rabbitLogListener
 {
     private $machine = "";
+    private $machineName;
 	public  $BROKER_HOST;
 	private $BROKER_PORT;
 	private $USER;
@@ -170,6 +173,7 @@ class rabbitLogListener
 
 	function __construct($machine, $server = "rabbitMQ")
 	{
+        $this->machineName = gethostname();
 		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
@@ -256,9 +260,16 @@ class rabbitLogListener
             $exchange->setName($this->exchange);
             $exchange->setType($this->exchange_type);
 
+            /*
 			$this->conn_queue = new AMQPQueue($channel);
 			$this->conn_queue->setName($this->queue);
 			$this->conn_queue->bind($exchange->getName(),$this->routing_key);
+			*/
+			
+            $this->conn_queue = new AMQPQueue($channel);
+            $this->conn_queue->setName($this->machineName."_logger");
+            $this->conn_queue->declare();
+			$this->conn_queue->bind($exchange->getName(),$this->routing_key.$this->machineName);
 
 			//list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
 			

@@ -1,0 +1,8 @@
+[Unit]
+Description=RabbitMQ log listener service
+
+[Service]
+ExecStart=/home/eric/Git/IT490-Project/RabbitLogger/logListener.php
+
+[Install]
+WantedBy=multi-user.target

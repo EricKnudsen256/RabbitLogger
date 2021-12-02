@@ -3,6 +3,7 @@ Description=RabbitMQ log listener service
 
 [Service]
 ExecStart=/home/eric/Git/IT490-Project/RabbitLogger/logListener.php
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
